@@ -4,13 +4,11 @@ import { Formik } from 'formik';
 import logo from '../../logo.svg';
 import './style.scss';
 
-const Login = ({ user, history }) => {
+const Register = ({ user, history }) => {
 
   return (
     <div className="App">
-
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <Formik
           initialValues={{ username: '', password: '' }}
           onSubmit={values => { console.log(values) }}
@@ -34,9 +32,9 @@ const Login = ({ user, history }) => {
                 name="password"
               />
               {props.errors.password && <div id="feedback">{props.errors.password}</div>}
-              <button type="submit">Log in</button>
-              <button onClick={() => history.push('/register')}>
-                Register
+              <button type="submit">Send</button>
+              <button onClick={() => history.goBack()}>
+                Cancel
               </button>
             </form>
           )}
@@ -56,4 +54,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login);
+)(Register);
