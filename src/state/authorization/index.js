@@ -1,3 +1,5 @@
-import reducers from './reducer';
+import reducers from './reducer'
+import * as services from './services'
 
-export default reducers;
+export { services }
+export default reducers
