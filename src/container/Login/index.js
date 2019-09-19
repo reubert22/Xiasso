@@ -1,10 +1,17 @@
-import React from 'react';
-import { connect } from "react-redux";
-import { Formik } from 'formik';
-import logo from '../../logo.svg';
-import './style.scss';
+import React from 'react'
+import { connect } from "react-redux"
+import { Formik } from 'formik'
 
-const Login = ({ user, history }) => {
+import * as authorizationService from '../../state/authorization/services'
+import logo from '../../logo.svg'
+import './style.scss'
+
+const Login = ({ user, history, authorization }) => {
+
+  const handleLoginSubmit = (e) => {
+    e.preventDefault()
+    authorization("marcelo@teste.com", "123123123")
+  }
 
   return (
     <div className="App">
@@ -15,7 +22,7 @@ const Login = ({ user, history }) => {
           initialValues={{ username: '', password: '' }}
           onSubmit={values => { console.log(values) }}
           render={props => (
-            <form onSubmit={props.handleSubmit} className="container-inputs">
+            <form onSubmit={handleLoginSubmit} className="container-inputs">
               <input
                 type="text"
                 placeholder="Username"
@@ -51,6 +58,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+  authorization: authorizationService.authorization
 };
 
 export default connect(
