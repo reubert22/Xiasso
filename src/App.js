@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
-import PrivateRoute from './container/utils/PrivateRoute';
+import PublicRoute from './container/utils/PublicRoute';
 import Login from './container/Login';
 import { store } from './store';
 import Register from './container/Register';
@@ -11,11 +11,11 @@ function App() {
     <Provider store={store}>
       <Router>
         <Switch>
-          <PrivateRoute
+          <PublicRoute
             path={`/register`}
             component={Register}
           />
-          <PrivateRoute
+          <PublicRoute
             path={`/`}
             component={Login}
           />

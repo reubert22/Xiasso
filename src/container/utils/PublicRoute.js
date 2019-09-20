@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import { connect } from "react-redux";
-import { Redirect, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { firebaseAuth } from "../../utils/firebase"
 
-const PrivateRoute = ({ component: Component, user, ...rest }) => {
+const PublicRoute = ({ component: Component, user, ...rest }) => {
   const [userAuth, setUserAuth] = useState(false)
 
   useEffect(() => {
@@ -16,8 +16,9 @@ const PrivateRoute = ({ component: Component, user, ...rest }) => {
     <Route
       {...rest}
       render={props =>
-        !userAuth
-          ? (<Redirect to={{ pathname: "/", state: { from: props.location } }} />)
+        userAuth
+         // ? (<Redirect to={{ pathname: "/dash", state: { from: props.location } }} />)
+          ? (console.log("redirect to home page"))
           : (<Component {...props} />)
       }
     />
@@ -34,4 +35,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PrivateRoute)
+)(PublicRoute)

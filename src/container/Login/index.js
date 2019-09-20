@@ -6,11 +6,10 @@ import * as authorizationService from '../../state/authorization/services'
 import logo from '../../logo.svg'
 import './style.scss'
 
-const Login = ({ user, history, authorization }) => {
+const Login = ({ user, history, authorization, logout }) => {
 
-  const handleLoginSubmit = (e) => {
-    e.preventDefault()
-    authorization("marcelo@teste.com", "123123123")
+  const handleLogout = () => {
+    logout()
   }
 
   return (
@@ -19,10 +18,10 @@ const Login = ({ user, history, authorization }) => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Formik
-          initialValues={{ username: '', password: '' }}
-          onSubmit={values => { console.log(values) }}
+          initialValues={{ username: "marcelo@teste.com", password: "123123123" }}
+          onSubmit={values => { authorization(values.username, values.password)  }}
           render={props => (
-            <form onSubmit={handleLoginSubmit} className="container-inputs">
+            <form onSubmit={props.handleSubmit} className="container-inputs">
               <input
                 type="text"
                 placeholder="Username"
@@ -42,12 +41,17 @@ const Login = ({ user, history, authorization }) => {
               />
               {props.errors.password && <div id="feedback">{props.errors.password}</div>}
               <button type="submit">Log in</button>
-              <button onClick={() => history.push('/register')}>
-                Register
-              </button>
             </form>
           )}
         />
+      
+              <button onClick={() => history.push('/register')}>
+                Register
+              </button>
+              <button onClick={() => handleLogout()}>
+                Logout
+              </button>
+            
       </header>
     </div>
   );
@@ -58,7 +62,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  authorization: authorizationService.authorization
+  authorization: authorizationService.authorization,
+  logout: authorizationService.logout
 };
 
 export default connect(
