@@ -1,57 +1,64 @@
 import React from 'react'
 import { connect } from "react-redux"
 import { Formik } from 'formik'
+import * as Yup from 'yup'
 
 import * as authorizationService from '../../state/authorization/services'
+import PasswordInput from '../../components/shared/inputs/Password'
+import TextInput from '../../components/shared/inputs/Text'
 import logo from '../../logo.svg'
 import './style.scss'
 
-const Login = ({ user, history, authorization, logout }) => { 
+const SignInSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Email inválido')
+    .required('Campo obrigatório'),
+  password: Yup.string()
+    .required('Campo obrigatório'),
+});
+
+const Login = ({ uid, history, authorization }) => {
   return (
     <div className="App">
 
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Formik
-          initialValues={{ username: "marcelo@teste.com", password: "123123123" }}
-          onSubmit={values => { authorization(values.username, values.password)  }}
-          render={props => (
-            <form onSubmit={props.handleSubmit} className="container-inputs">
-              <input
-                type="text"
-                placeholder="Username"
-                onChange={props.handleChange}
-                onBlur={props.handleBlur}
-                value={props.values.username}
-                name="username"
+          initialValues={{ email: "", password: "" }}
+          onSubmit={values => { authorization(values.email, values.password) }}
+          validationSchema={SignInSchema}
+          render={({ handleSubmit, handleChange, handleBlur, errors, touched, values }) => (
+            <form onSubmit={handleSubmit} className="container-inputs">
+              <TextInput
+                placeholder="Email"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+                name="email"
               />
-              {props.errors.username && <div id="feedback">{props.errors.username}</div>}
-              <input
-                type="password"
+              {errors.email && touched.email && <div id="feedback">{errors.email}</div>}
+              <PasswordInput
                 placeholder="Password"
-                onChange={props.handleChange}
-                onBlur={props.handleBlur}
-                value={props.values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
                 name="password"
               />
-              {props.errors.password && <div id="feedback">{props.errors.password}</div>}
+              {errors.password && touched.password && <div id="feedback">{errors.password}</div>}
               <button type="submit">Log in</button>
             </form>
           )}
         />
-      
-              <button onClick={() => history.push('/register')}>
-                Register
-              </button>
-              
-            
+        <button onClick={() => history.push('/register')}>
+          Register
+        </button>
       </header>
     </div>
   );
 }
 
 const mapStateToProps = state => ({
-  user: state.user
+  uid: state.auth.uid
 });
 
 const mapDispatchToProps = {

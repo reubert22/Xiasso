@@ -1,7 +1,8 @@
 import React from 'react'
-import './style.scss'
 import { connect } from 'react-redux'
+
 import * as authorizationService from '../../state/authorization/services'
+import './style.scss'
 
 const Home = ({ logout }) => {
   const handleLogout = () => {
@@ -11,7 +12,7 @@ const Home = ({ logout }) => {
   return (
     <div>Home page bro
     <button onClick={() => handleLogout()}>
-      Logout
+        Logout
     </button>
     </div>
   );
