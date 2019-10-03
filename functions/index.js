@@ -43,7 +43,7 @@ app.post('/register', async (req, res) => {
     const userRecord = await admin.auth().createUser({ email, password, displayName: firstName })
     const userFirestoreRef = admin.firestore().collection('users')
     await userFirestoreRef.doc(userRecord.uid).set({ email, firstName, lastName })
-    return res.send(userRecord.uid)
+    return res.send({uid: userRecord.uid, emailVerified: userRecord.emailVerified})
   } catch (e) {
     if(e.code) {
       const erroDetails = loginErros(e.code)
