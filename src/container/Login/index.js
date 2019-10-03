@@ -4,6 +4,7 @@ import { Formik } from 'formik'
 import * as Yup from 'yup'
 
 import * as authorizationService from '../../state/authorization/services'
+import AnimatedButton from '../../components/shared/animated/Button';
 import PasswordInput from '../../components/shared/inputs/Password'
 import TextInput from '../../components/shared/inputs/Text'
 import logo from '../../logo.svg'
@@ -45,13 +46,18 @@ const Login = ({ uid, history, authorization }) => {
                 name="password"
               />
               {errors.password && touched.password && <div id="feedback">{errors.password}</div>}
-              <button type="submit">Log in</button>
+              <AnimatedButton
+                type="submit"
+                title="Entrar"
+              />
+              <AnimatedButton
+                type="button"
+                title="Registrar"
+                onClick={() => history.push('/register')}
+              />
             </form>
           )}
         />
-        <button onClick={() => history.push('/register')}>
-          Register
-        </button>
       </header>
     </div>
   );

@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 
+import AnimatedButton from '../../components/shared/animated/Button';
 import PasswordInput from '../../components/shared/inputs/Password'
 import TextInput from '../../components/shared/inputs/Text'
 import './style.scss'
@@ -81,10 +82,15 @@ const Register = ({ history }) => {
                 name="confirmPassword"
               />
               {errors.confirmPassword && touched.confirmPassword && <div id="feedback">{errors.confirmPassword}</div>}
-              <button type="submit">Send</button>
-              <button onClick={() => history.goBack()}>
-                Cancel
-              </button>
+              <AnimatedButton
+                type="submit"
+                title="Cadastrar"
+              />
+              <AnimatedButton
+                type="button"
+                title="Voltar"
+                onClick={() => history.goBack()}
+              />
             </form>
           )}
         />
