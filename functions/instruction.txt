@@ -1,0 +1,5 @@
+firebase functions:config:set someservice.apikey="THE API KEY" someservice.authdomain="THE CLIENT ID" someservice.projectid="PROJECT ID"
+
+local -> firebase emulators:start
+
+deploy -> firease deploy --only functions
