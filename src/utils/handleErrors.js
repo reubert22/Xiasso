@@ -12,4 +12,7 @@ export default (error, dispatch) => {
         return;
     }
   }
+  if (error && error.response) {
+    return Toast(error.response.data.message);
+  }
 };

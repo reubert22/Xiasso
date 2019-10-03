@@ -18,7 +18,7 @@ const SignInSchema = Yup.object().shape({
     .required('Campo obrigatório'),
 });
 
-const Login = ({ uid, history, authorization }) => {
+const Login = ({ uid, history, authorization, loading }) => {
   return (
     <div className="App">
 
@@ -48,7 +48,7 @@ const Login = ({ uid, history, authorization }) => {
               {errors.password && touched.password && <div id="feedback">{errors.password}</div>}
               <AnimatedButton
                 type="submit"
-                title="Entrar"
+                title={loading ? "..." : "Entrar"}
               />
               <AnimatedButton
                 type="button"
@@ -64,7 +64,8 @@ const Login = ({ uid, history, authorization }) => {
 }
 
 const mapStateToProps = state => ({
-  uid: state.auth.uid
+  uid: state.auth.uid,
+  loading: state.auth.isLoading
 });
 
 const mapDispatchToProps = {
