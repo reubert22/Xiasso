@@ -1,13 +1,14 @@
 import React from 'react';
-import { Provider } from "react-redux";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
-import { store } from './store';
-import PublicRoute from './container/utils/PublicRoute';
+import { ToastContainer } from 'react-toastify';
+import { Provider } from "react-redux";
 import PrivateRoute from './container/utils/PrivateRoute';
-import Login from './container/Login';
+import PublicRoute from './container/utils/PublicRoute';
 import Register from './container/Register';
+import Login from './container/Login';
 import Home from './container/Home';
 import EmailVerify from './components/notifications/EmailVerify';
+import { store } from './store';
 
 function App() {
   return (
@@ -28,6 +29,14 @@ function App() {
             component={Login}
           />
         </Switch>
+        <ToastContainer
+          pauseOnVisibilityChange
+          position="top-right"
+          closeOnClick
+          newestOnTop
+          rtl={false}
+          draggable
+        />
       </Router>
     </Provider>
   );

@@ -1,5 +1,6 @@
 import * as actions from './actions'
 import * as repository from './repository'
+import handleErrors from '../../utils/handleErrors';
 
 export const authorization = (email, password) => async (dispatch) => {
   try {
@@ -9,7 +10,7 @@ export const authorization = (email, password) => async (dispatch) => {
     dispatch(actions.successUid(response.user.uid))
     dispatch(actions.isLoading(false))
   } catch (error) {
-    console.log(error)
+    handleErrors(error, dispatch)
     dispatch(actions.isLoading(false))
   }
 }
