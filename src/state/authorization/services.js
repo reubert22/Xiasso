@@ -5,7 +5,8 @@ export const authorization = (email, password) => async (dispatch) => {
   try {
     dispatch(actions.isLoading(true))
     const response = await repository.authorization(email, password)
-    dispatch(actions.successLogin(response.user.uid))
+    dispatch(actions.successLogin({ email: response.user.email, emailVerified: response.user.emailVerified }))
+    dispatch(actions.successUid(response.user.uid))
     dispatch(actions.isLoading(false))
   } catch (error) {
     console.log(error)

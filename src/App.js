@@ -7,17 +7,19 @@ import PrivateRoute from './container/utils/PrivateRoute';
 import Login from './container/Login';
 import Register from './container/Register';
 import Home from './container/Home';
- 
+import EmailVerify from './components/notifications/EmailVerify';
+
 function App() {
   return (
     <Provider store={store}>
       <Router>
+        <EmailVerify />
         <Switch>
           <PublicRoute
             path={`/register`}
             component={Register}
           />
-          <PrivateRoute 
+          <PrivateRoute
             path={'/home'}
             component={Home}
           />
