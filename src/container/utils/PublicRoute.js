@@ -1,38 +1,23 @@
-import React, {useEffect, useState} from "react";
-import { connect } from "react-redux";
-import { Route } from "react-router-dom";
-import { firebaseAuth } from "../../utils/firebase"
+import React from "react"
+import { connect } from "react-redux"
+import { Route, Redirect } from "react-router-dom"
 
-const PublicRoute = ({ component: Component, user, ...rest }) => {
-  const [userAuth, setUserAuth] = useState(false)
-
-  useEffect(() => {
-    firebaseAuth.onAuthStateChanged(response => {
-      response ? setUserAuth(response) : setUserAuth(false)
-    })
-  },[])
-  console.log(userAuth)
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        userAuth
-         // ? (<Redirect to={{ pathname: "/dash", state: { from: props.location } }} />)
-          ? (console.log("redirect to home page"))
-          : (<Component {...props} />)
-      }
-    />
-  );
-};
+const PublicRoute = ({ component: Component, uid, origin, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      uid
+      ? (<Redirect to={{ pathname: "/home", state: { from: props.location } }} />)
+      : (<Component {...props} />)
+    }
+  />
+);
 
 const mapStateToProps = state => ({
-  user: state.user
+  uid: state.auth.uid
 });
-
-const mapDispatchToProps = {
-};
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(PublicRoute)

@@ -1,11 +1,13 @@
 import React from 'react';
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
-import PublicRoute from './container/utils/PublicRoute';
-import Login from './container/Login';
 import { store } from './store';
+import PublicRoute from './container/utils/PublicRoute';
+import PrivateRoute from './container/utils/PrivateRoute';
+import Login from './container/Login';
 import Register from './container/Register';
-
+import Home from './container/Home';
+ 
 function App() {
   return (
     <Provider store={store}>
@@ -14,6 +16,10 @@ function App() {
           <PublicRoute
             path={`/register`}
             component={Register}
+          />
+          <PrivateRoute 
+            path={'/home'}
+            component={Home}
           />
           <PublicRoute
             path={`/`}

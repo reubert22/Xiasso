@@ -1,1 +1,1 @@
-export { default as user } from "./authorization";
+export { default as auth } from "./authorization";

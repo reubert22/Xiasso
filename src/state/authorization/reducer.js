@@ -1,14 +1,14 @@
 import * as types from "./types";
 
 const initialState = {
-  user: {},
+  uid: null,
   isLoading: false
 };
 
 const reducers = (state = initialState, action) => {
   switch (action.type) {
     case types.SUCCESS_LOGIN:
-      return { ...state, user: action.user };
+      return { ...state, uid: action.uid };
     case types.IS_LOADING:
       return { ...state, isLoading: action.loading };
     case types.LOGOUT:

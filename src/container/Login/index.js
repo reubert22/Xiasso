@@ -6,12 +6,7 @@ import * as authorizationService from '../../state/authorization/services'
 import logo from '../../logo.svg'
 import './style.scss'
 
-const Login = ({ user, history, authorization, logout }) => {
-
-  const handleLogout = () => {
-    logout()
-  }
-
+const Login = ({ user, history, authorization, logout }) => { 
   return (
     <div className="App">
 
@@ -48,9 +43,7 @@ const Login = ({ user, history, authorization, logout }) => {
               <button onClick={() => history.push('/register')}>
                 Register
               </button>
-              <button onClick={() => handleLogout()}>
-                Logout
-              </button>
+              
             
       </header>
     </div>
@@ -62,8 +55,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  authorization: authorizationService.authorization,
-  logout: authorizationService.logout
+  authorization: authorizationService.authorization
 };
 
 export default connect(

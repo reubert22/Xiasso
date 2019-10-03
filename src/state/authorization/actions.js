@@ -1,8 +1,8 @@
 import * as types from "./types";
 
-export const successLogin = user => ({
-    type: types.SUCCESS_LOGIN,
-    user
+export const successLogin = uid => ({
+  type: types.SUCCESS_LOGIN,
+  uid
 });
 
 export const isLoading = loading => ({
